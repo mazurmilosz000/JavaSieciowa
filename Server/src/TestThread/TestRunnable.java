@@ -5,9 +5,9 @@ import com.milosz000.Main;
 
 public class TestRunnable implements Runnable{
 
-    private int nrTask;
+    private int taskNumber;
     public TestRunnable(int task) {
-        nrTask = task;
+        taskNumber = task;
     }
 
     @Override

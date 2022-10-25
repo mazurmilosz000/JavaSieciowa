@@ -35,6 +35,6 @@ public class Main {
 //        th.join();
         TestThread tsR = new TestThread();
         tsR.startRunnable(10);
-        System.out.println("Zakończenie wątku głownego");
+        System.out.println("Zakończenie wątku main");
     }
 }

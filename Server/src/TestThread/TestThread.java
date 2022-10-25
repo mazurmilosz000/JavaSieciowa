@@ -9,11 +9,11 @@ public class TestThread {
         ExecutorService service = Executors.newCachedThreadPool();
         ThreadPoolExecutor threadPool = (ThreadPoolExecutor) service;
 
-        int numberTask =0;
-        while (numberTask < 20) {
+        int taskNumber =0;
+        while (taskNumber < 20) {
             if(threadPool.getActiveCount() < maxThread) {
-                service.submit(new TestRunnable(numberTask));
-                numberTask++;
+                service.submit(new TestRunnable(taskNumber));
+                taskNumber++;
             }
         }
         service.shutdown();
