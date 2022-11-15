@@ -4,8 +4,6 @@ import DB.DBOperations;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +41,10 @@ public class Main {
 //        }
 //        System.out.println();
 //
-//        Path location = Path.of("C:\\");
-//        File[] tempFiles = location.toFile().listFiles();
-//        for (File f : tempFiles)
-//            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
+        Path location = Path.of("C:\\");
+        File[] tempFiles = location.toFile().listFiles();
+        for (File f : tempFiles)
+            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
 
         DBConnection conn = new DBConnection();
         Connection c = conn.connectToSqlite();

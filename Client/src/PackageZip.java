@@ -1,9 +1,11 @@
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class PackageZip {
@@ -49,6 +51,29 @@ public class PackageZip {
             zipOut.close();
             System.out.println("Zapisano plik do archiwum ZIP");
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unpackageArchive(Path dlocation, String zipName) {
+        try {
+            try {
+                ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipName));
+                ZipEntry zipE;
+                while ((zipE = zipIn.getNextEntry()) != null) {
+                    FileOutputStream fOut =
+                            new FileOutputStream(
+                                    new File(dlocation.toString(), zipE.getName()));
+                    fOut.write(zipIn.readAllBytes());
+                    fOut.flush();
+                    fOut.close();
+                    zipIn.closeEntry();
+                }
+                zipIn.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
