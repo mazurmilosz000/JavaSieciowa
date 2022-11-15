@@ -37,10 +37,10 @@ public class Main {
 //        }
 //        System.out.println();
 //
-//        Path location = Path.of("C:\\");
-//        File[] tempFiles = location.toFile().listFiles();
-//        for (File f : tempFiles)
-//            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
+        Path location = Path.of("C:\\");
+        File[] tempFiles = location.toFile().listFiles();
+        for (File f : tempFiles)
+            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
 
 
 
