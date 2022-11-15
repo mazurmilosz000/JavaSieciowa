@@ -1,21 +1,26 @@
+import DB.DBConnection;
+import DB.DBOperations;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 //        Client c = new Client("localhost", 5501);
 //        c.connection();
 //        c.sendMessage();
 //        c.disconnect();
 
-        FileClient fc = new FileClient("localhost", 5501, "pliki\\");
-        fc.connection();
-        fc.sendFileToServer();
-        fc.disconnect();
+//        FileClient fc = new FileClient("localhost", 5501, "pliki\\");
+//        fc.connection();
+//        fc.sendFileToServer();
+//        fc.disconnect();
 
 //        List<String> results = new ArrayList<>();
 //        File[] files = new File("C:\\Users\\7280\\Desktop\\pulpit").listFiles();
@@ -41,6 +46,17 @@ public class Main {
 //        File[] tempFiles = location.toFile().listFiles();
 //        for (File f : tempFiles)
 //            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
+
+        DBConnection conn = new DBConnection();
+        Connection c = conn.connectToSqlite();
+        DBOperations operation = new DBOperations(c);
+        operation.insertPerson("Maciej", "Nowak", 22);
+        operation.insertPerson("Piotr", "Rubik", 54);
+        operation.insertPerson("Jan", "Kowalski", 16);
+        operation.selectPeople();
+
+        conn.createTable();
+        conn.disconnect();
 
 
 
