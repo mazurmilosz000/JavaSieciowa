@@ -3,6 +3,8 @@ package com.milosz000;
 import TestThread.TestRunnable;
 import TestThread.TestThread;
 
+
+
 public class Main {
     public static int[] tableInt;
     public static void main(String[] args) throws InterruptedException {
@@ -17,24 +19,12 @@ public class Main {
             tableInt[i] =-1;
         }
 
-        Thread th = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName());
-                for (int i=0; i<20; i++) {
-                    System.out.println("Wartosc " + i);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-//        th.start();
-//        th.join();
-        TestThread tsR = new TestThread();
-        tsR.startRunnable(10);
+
+        TestThread tsR = new TestThread(200, 10);
+//        tsR.startThread();
+//        tsR.startRunnable(10);
+        tsR.startRunnableFixed(5);
         System.out.println("Zakończenie wątku main");
+
     }
 }
