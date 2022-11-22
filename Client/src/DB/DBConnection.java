@@ -1,9 +1,6 @@
 package DB;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBConnection {
 
@@ -23,6 +20,19 @@ public class DBConnection {
         return null;
     }
 
+    public Connection connectionToMySql(){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/test",
+                    "root",
+                    "usbw"
+            );
+            System.out.println("Połączono z bazą danych");
+            return conn;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void createTable() {
         String query = "CREATE TABLE IF NOT EXISTS Person" +
                 "(Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -34,6 +44,25 @@ public class DBConnection {
             prepr.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public Savepoint getPoint() {
+        try {
+            Savepoint s = conn.setSavepoint();
+            conn.setAutoCommit(false);
+            System.out.println("Utworzono punkt przywracania");
+            return s;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void getRollback(Savepoint point) {
+        try {
+            conn.rollback(point);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

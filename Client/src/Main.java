@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.nio.file.Paths;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -42,20 +43,32 @@ public class Main {
 //        }
 //        System.out.println();
 //
-        Path location = Path.of("C:\\");
-        File[] tempFiles = location.toFile().listFiles();
-        for (File f : tempFiles)
-            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
+//        Path location = Path.of("C:\\");
+//        File[] tempFiles = location.toFile().listFiles();
+//        for (File f : tempFiles)
+//            System.out.println(f.getName() + (f.isFile() ? " plik" : " katalog"));
 
         DBConnection conn = new DBConnection();
-        Connection c = conn.connectToSqlite();
+  //      Connection c = conn.connectToSqlite();
+        Connection c = conn.connectionToMySql();
         DBOperations operation = new DBOperations(c);
-        operation.insertPerson("Maciej", "Nowak", 22);
-        operation.insertPerson("Piotr", "Rubik", 54);
-        operation.insertPerson("Jan", "Kowalski", 16);
-        operation.selectPeople();
+        Savepoint s = conn.getPoint();
+//        operation.insertPerson("Maciej", "Nowak", 22);
+//        operation.insertPerson("Piotr", "Rubik", 54);
+//        operation.insertPerson("Jan", "Kowalski", 16);
+//        operation.selectPeople();
+        operation.insertPerson("Janusz", "Kowal", 77);
+        operation.setName(2, "Jonasz");
+        operation.getAllPersons();
 
-        conn.createTable();
+        // TODO: fix Exception
+        conn.getRollback(s);
+        operation.getAllPersons();
+//        operation.getCountPerson();
+//        operation.getPerson(1);
+//        operation.getAllPersons();
+
+   //     conn.createTable();
         conn.disconnect();
 
 
