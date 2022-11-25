@@ -1,7 +1,6 @@
 package com.milosz000;
 
-import TestThread.TestRunnable;
-import TestThread.TestThread;
+import com.milosz000.TestThread.TestThread;
 
 
 

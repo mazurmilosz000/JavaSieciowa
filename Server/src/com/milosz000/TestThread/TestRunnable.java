@@ -1,4 +1,4 @@
-package TestThread;
+package com.milosz000.TestThread;
 
 import java.util.Random;
 import com.milosz000.Main;
