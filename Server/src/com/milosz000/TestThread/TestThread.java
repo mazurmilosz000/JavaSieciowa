@@ -1,4 +1,4 @@
-package TestThread;
+package com.milosz000.TestThread;
 
 import java.io.File;
 import java.util.List;
